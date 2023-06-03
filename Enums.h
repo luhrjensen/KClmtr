@@ -30,20 +30,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #ifdef __cplusplus_cli
 #define ENUMKEYWORD(NAME, TYPE, ...) \
-public enum class NAME : TYPE { \
-	__VA_ARGS__ \
+public enum class NAME : TYPE {      \
+	__VA_ARGS__                      \
 };
 #else
-#define ENUMKEYWORD(NAME, TYPE, ...) \
-struct NAME { \
-    enum e { __VA_ARGS__ }; \
-    explicit NAME(TYPE v) : val(v) {} \
-    NAME(e v) : val(v) {} \
-    operator e() const { return e(val); } \
-        NAME() : val(0) { } \
-    private:\
-        TYPE val; \
-}
+#define ENUMKEYWORD(NAME, TYPE, ...)        \
+struct NAME {                               \
+    enum e { __VA_ARGS__ };                 \
+    explicit NAME(TYPE v) : val(v) {}       \
+    NAME(e v) : val(v) {}                   \
+    operator e() const { return e(val); }   \
+        NAME() : val(0) { }                 \
+    private:                                \
+        TYPE val;                           \
+};
 #endif
 namespace KClmtrBase {
 std::string intToString(int value);
