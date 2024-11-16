@@ -1217,20 +1217,20 @@ Measurement Measurement::fromXYZ(double X, double Y, double Z, const GamutSpec &
     Measurement m;
     m.errorcode |= error;
 
-//    if(ABS(X) < 1e-10) {
-//        X = 0;
-//    }
-//    if(ABS(Y) < 1e-10) {
-//        Y = 0;
-//    }
-//    if(ABS(Z) < 1e-10) {
-//        Z = 0;
-//    }
-//    if(X < 0 || Y < 0 || Z < 0) {
-//        m.computeDerivativeData(0, 0, 0, gs);
-//        m.errorcode |= (int)KleinsErrorCodes::BAD_VALUES;
-//        return m;
-//    }
+    if(ABS(X) < 1e-10) {
+        X = 0;
+    }
+    if(ABS(Y) < 1e-10) {
+        Y = 0;
+    }
+    if(ABS(Z) < 1e-10) {
+        Z = 0;
+    }
+    if(X + Y + Z =< 0) {
+        m.computeDerivativeData(0, 0, 0, gs);
+        m.errorcode |= (int)KleinsErrorCodes::BAD_VALUES;
+        return m;
+    }
     m.computeDerivativeData(X, Y, Z, gs);
     return m;
 }
